@@ -2,13 +2,13 @@ import { ArrowUpRight, FileDown, Github, Linkedin, Mail, MapPin } from "lucide-r
 import { Contours } from "@/components/site/contours";
 import { Reveal, RevealObserver } from "@/components/site/reveal";
 import { Bullet, Section, Tag } from "@/components/site/section";
-import { education, experience, hackathons, highlights, profile, projects, skills } from "@/lib/resume";
+import { education, experience, hackathons, profile, projects, skills } from "@/lib/resume";
 
 const nav = [
   { href: "#about", label: "About" },
+  { href: "#education", label: "Education" },
   { href: "#experience", label: "Experience" },
   { href: "#projects", label: "Projects" },
-  { href: "#education", label: "Education" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -17,13 +17,7 @@ export default function Home() {
     <div className="relative min-h-screen overflow-x-clip">
       <RevealObserver />
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-[#08090a]/70 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
-          <a href="#top" className="flex items-center gap-2.5 text-sm font-medium tracking-tight text-zinc-100">
-            <span className="grid h-7 w-7 place-items-center rounded-md border border-white/10 bg-white/[0.04] font-mono text-[11px] text-teal-300">
-              CN
-            </span>
-            {profile.name}
-          </a>
+        <div className="mx-auto flex h-16 max-w-5xl items-center justify-end px-6">
           <nav className="flex items-center gap-1">
             {nav.map((item) => (
               <a
@@ -61,7 +55,7 @@ export default function Home() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-300 opacity-60 motion-reduce:animate-none" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-teal-300" />
               </span>
-              Associate Software Developer at Triona
+              M.Sc. Data Science · University of Helsinki
             </p>
           </Reveal>
 
@@ -125,18 +119,6 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* Highlights */}
-        <section className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.06] md:grid-cols-4">
-          {highlights.map((h, i) => (
-            <Reveal key={h.label} delay={i * 0.05} className="bg-[#0b0c0e] p-5 md:p-6">
-              <p className="text-2xl font-semibold tracking-tight text-teal-300 md:text-3xl">{h.value}</p>
-              <p className="mt-2 text-sm leading-snug text-zinc-400">{h.label}</p>
-            </Reveal>
-          ))}
-        </section>
-
-        <div className="h-16 md:h-24" />
-
         <Section id="about" index="01" title="About">
           <Reveal>
             <div className="space-y-5 text-lg leading-relaxed text-zinc-300">
@@ -165,7 +147,29 @@ export default function Home() {
           </Reveal>
         </Section>
 
-        <Section id="experience" index="02" title="Experience">
+        <Section id="education" index="02" title="Education">
+          <div className="relative space-y-10 border-l border-white/[0.08] pl-6">
+            {education.map((e) => (
+              <Reveal key={e.school}>
+                <div className="relative">
+                  <span className="absolute -left-[29px] top-2 h-2 w-2 rounded-full border border-teal-300/70 bg-[#08090a]" />
+                  <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
+                    <h3 className="text-lg font-semibold tracking-tight text-zinc-50">{e.school}</h3>
+                    <p className="shrink-0 font-mono text-xs text-zinc-500">{e.period}</p>
+                  </div>
+                  <p className="mt-1 text-sm text-zinc-400">{e.degree}</p>
+                  <ul className="mt-4 space-y-2 text-sm leading-relaxed text-zinc-300">
+                    {e.points.map((p) => (
+                      <Bullet key={p}>{p}</Bullet>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </Section>
+
+        <Section id="experience" index="03" title="Experience">
           {experience.map((job) => (
             <Reveal key={job.company}>
               <article className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 md:p-8">
@@ -193,7 +197,7 @@ export default function Home() {
           ))}
         </Section>
 
-        <Section id="projects" index="03" title="Projects">
+        <Section id="projects" index="04" title="Projects">
           <div className="grid gap-4 sm:grid-cols-2">
             {projects.map((p, i) => {
               const body = (
@@ -254,28 +258,6 @@ export default function Home() {
               ))}
             </ul>
           </Reveal>
-        </Section>
-
-        <Section id="education" index="04" title="Education">
-          <div className="relative space-y-10 border-l border-white/[0.08] pl-6">
-            {education.map((e) => (
-              <Reveal key={e.school}>
-                <div className="relative">
-                  <span className="absolute -left-[29px] top-2 h-2 w-2 rounded-full border border-teal-300/70 bg-[#08090a]" />
-                  <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
-                    <h3 className="text-lg font-semibold tracking-tight text-zinc-50">{e.school}</h3>
-                    <p className="shrink-0 font-mono text-xs text-zinc-500">{e.period}</p>
-                  </div>
-                  <p className="mt-1 text-sm text-zinc-400">{e.degree}</p>
-                  <ul className="mt-4 space-y-2 text-sm leading-relaxed text-zinc-300">
-                    {e.points.map((p) => (
-                      <Bullet key={p}>{p}</Bullet>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </Section>
 
         <Section id="skills" index="05" title="Skills">
